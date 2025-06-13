@@ -1,13 +1,12 @@
 from flask import Flask,make_response
 from flask_migrate import Migrate
 from models import db,User,Task
+from dotenv import load_dotenv
+
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"]= "sqlite:///task.db"
+app.config.from_prefixed_env()
 
-# save on memory avoid building up too much data
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-# iniatialize the db(connect db to app)
 db.init_app(app)
 
 migration = Migrate(app,db)
