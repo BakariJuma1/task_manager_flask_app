@@ -1,19 +1,19 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String,Column,Integer,MetaData,DateTime
 from datetime import datetime,timedelta
-
+from sqlalchemy_serializer import SerializerMixin
 metadata = MetaData()
 
 db = SQLAlchemy(metadata=metadata)
 
-class User(db.Model):
+class User(db.Model,SerializerMixin):
     __tablename__ = "users"
 
     id = Column(Integer(),primary_key=True)
     name = Column(String(80))
     email = Column(String(),unique=True)
 
-class Task(db.Model):
+class Task(db.Model,SerializerMixin):
 
     __tablename__ = "Tasks"
     
